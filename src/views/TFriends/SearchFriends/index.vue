@@ -6,17 +6,19 @@
         <button @click="searchFriend(searchUser)">搜索</button>
       </div>
       <transition name="animate__animated animate__bounce" enter-active-class="animate__bounceInUp">
-      <div class="result" v-show="resultShow">
+      <div class="results">
+        <div class="result" v-show="resultShow" v-for="(item,idx) in searchResult" :key="idx">
         <div class="img">
-          <img :src="searchResult.user_pic" alt="">
+          <img :src="item.user_pic" alt="">
         </div>
         <div class="info">
-          <p class="nickname">{{searchResult.nickname}}</p>
-          <p class="signature">{{searchResult.signature}}</p>
+          <p class="nickname">{{item.nickname}}</p>
+          <p class="signature">{{item.signature}}</p>
         </div>
         <div class="btn">
-          <button @click="appendFriend(searchResult.id)">添加</button>
+          <button @click="appendFriend(item.username)">添加</button>
         </div>
+      </div>
       </div>
       </transition>
       <div class="noneResult" v-show="!resultShow">
@@ -76,6 +78,11 @@ export default {
         this.$message({
           message: '添加好友成功',
           type: 'success'
+        });
+      }else if(result.status==1){
+        return this.$message({
+          message: '您已拥有该好友，请勿重复添加',
+          type: 'warning'
         });
       }
       else this.$message.error('添加失败')
@@ -145,7 +152,7 @@ export default {
   background-color: rgb(247, 238, 58);
 }
 .result{
-  margin-top: 100px;
+  margin-top: 20px;
 }
 .result div{
   display: inline-block;

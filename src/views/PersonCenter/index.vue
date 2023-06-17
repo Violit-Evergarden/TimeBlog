@@ -59,20 +59,20 @@
         <div class="gender" ref="gender">
           <span>性别：</span>
           <button
-            @click="userData.gender = 0"
-            :class="{ cur: userData.gender === 0 }"
+            @click="userData.gender = '0'"
+            :class="{ cur: userData.gender == 0 }"
           >
             男
           </button>
           <button
             @click="userData.gender = 1"
-            :class="{ cur: userData.gender === 1 }"
+            :class="{ cur: userData.gender == 1 }"
           >
             女
           </button>
           <button
             @click="userData.gender = 2"
-            :class="{ cur: userData.gender === 2 }"
+            :class="{ cur: userData.gender == 2 }"
           >
             保密
           </button>

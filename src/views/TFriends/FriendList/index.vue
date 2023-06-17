@@ -26,7 +26,7 @@
       <div class="online">
         <p class="title" @click.prevent="showOnline(onShowHid)"><i ref="angel1" class="iconfont icon-youjiantou9"></i><span>在线好友</span><span class="friendnum">{{friendsList.length}}/14</span></p>
         <div class="onlineList" ref="onlineList">
-          <div v-for="(friend,index) in friendsList" :key="index" class="friends" @contextmenu.prevent="showSmallList(friend.id,$event)">
+          <div v-for="(friend,index) in friendsList" :key="index" class="friends" @contextmenu.prevent="showSmallList(friend.username,$event)">
             <div class="info1">
               <img :src="friend.user_pic" alt="">
             </div>
@@ -127,7 +127,7 @@ export default {
         let idList=[]
         this.friendsList=result.friendsInfoList
         result.friendsInfoList.forEach(item=>{
-          idList.push(item.id)
+          idList.push(item._id)
         })
         this.$bus.$emit('getIdList',idList)
       }
@@ -252,7 +252,7 @@ i{
   margin-bottom: 10px;
 }
 .onlineList{
-  height: 0;
+  height: 400px;
   transition: .5s;
   overflow: hidden;
 }
@@ -266,6 +266,7 @@ i{
   padding-top: 10px;
   padding-left: 10px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.247);
+  display: flex;
 }
 .friends:hover{
   background-color: rgba(143, 143, 143, 0.527);
@@ -286,9 +287,7 @@ i{
 .title span{
   cursor: pointer;
 }
-.friends div{
-  display: inline-block;
-}
+
 .info2{
   transform: translateY(-10px);
 }
@@ -298,6 +297,11 @@ i{
 }
 .info2 p:last-child{
   color: rgb(198, 198, 198);
+  width: 85%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  /* text-emphasis:; */
 }
 .online{
   border-bottom: 1px solid rgba(255, 255, 255, 0.493);
